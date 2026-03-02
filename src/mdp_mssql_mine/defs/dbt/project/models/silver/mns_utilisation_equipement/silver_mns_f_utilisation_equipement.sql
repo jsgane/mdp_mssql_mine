@@ -7,7 +7,7 @@
 
 
 with mns_utilisation_equipement as (
-    select * from {{ source('bronze', 'a_bronze_mns_f_utilisation_equipement') }}
+    select * from {{ source('bronze', 'A_BRONZE_MNS_F_UTILISATION_EQUIPEMENT') }}
 ),
 
 silver_mns_utilisation_equipement as (

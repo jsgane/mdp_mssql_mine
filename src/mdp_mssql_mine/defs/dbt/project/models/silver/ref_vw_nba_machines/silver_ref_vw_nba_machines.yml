@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: silver_delivery_service 
+  - name: silver_ref_vw_nba_machines 
     description: |
       Parts delivery service header and line from sav.
 

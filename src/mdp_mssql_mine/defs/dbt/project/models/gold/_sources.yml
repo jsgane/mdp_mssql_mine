@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: silver
+    description: "Silver layer mine mssql data"
+    database: "{{ env_var('SNOWFLAKE_DATABASE', 'NEEMBA') }}"
+    schema: mines
+
+    tables:
+      - name: b_silver_mns_f_equipement_arret_v_0_1
+        description: "equipement_arret information (Source:  NMBMTS.dbo.mns_f_equipement_arret_v_0_1)"
+
+      - name: b_silver_mns_d_type_evenement_arret
+        description: "type_evenement_arret information (Source:  NMBMTS.dbo.mns_d_type_evenement_arret)"
+  
+      - name: FACT_OP_HOURS
+        description: "Fact_Op_Hours information (Source:  [NMBMTS].[dbo].[ref_vw_nba_machines] )"
+      
+      - name: b_silver_mts_vw_down_event_history
+        description: "Down_event_history information (Source:  [NMBMTS].[dbo].[mts_vw_down_event_history] )"
+
+      - name: c_gold_mts_vw_tum_kpis
+        description: "C_gold_mts_vw_tum_kpis information (Source:  [Mine_site].[dbo].[dbo].[mts_vw_tum_kpis] )"

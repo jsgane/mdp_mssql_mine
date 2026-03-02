@@ -10,8 +10,14 @@ sources:
       - name: a_bronze_mns_d_site
         description: "Sites information (Source: [NMBMTS].[dbo].[mns_d_site])"
 
-      - name: a_bronze_ref_vw_nba_machines
+      - name: A_BRONZE_MNS_F_UTILISATION_EQUIPEMENT 
         description: "Dim_Machine information (Source:  [NMBMTS].[dbo].[mns_f_utilisation_equipement])"
 
-      - name: a_bronze_mns_f_utilisation_equipement
+      - name: a_bronze_ref_vw_nba_machines
         description: "Fact_Op_Hours information (Source:  [NMBMTS].[dbo].[ref_vw_nba_machines] )"
+
+      - name: b_silver_mns_f_equipement_arret_v_0_1
+        description: "Fact_Op_Hours information (Source:  NMBMTS.dbo.mns_f_equipement_arret_v_0_1)"
+
+      - name: b_silver_mns_d_type_evenement_arret
+        description: "Fact_Op_Hours information (Source:  NMBMTS.dbo.mns_d_type_evenement_arret)"

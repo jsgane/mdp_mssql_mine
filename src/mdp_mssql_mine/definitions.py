@@ -6,7 +6,9 @@ from mdp_mssql_mine.defs.assets import(
     mns_d_site_assets,
     mns_f_utilisation_equipement_assets,
     ref_vw_nba_machines_assets,
-    mts_vw_down_event_history_assets,
+    #mts_vw_down_event_history_assets,
+    mns_d_type_evenement_arret_assets,
+    mns_f_equipement_arret_assets,
 
 )
 
@@ -25,12 +27,20 @@ ref_vw_nba_machines_job = define_asset_job(
     name="ref_vw_nba_machines_job",
     selection=[ref_vw_nba_machines_assets],
 )
-mts_vw_down_event_history_job = define_asset_job(
-    name="mts_vw_down_event_history_job",
-    selection=[mts_vw_down_event_history_assets],
+#mts_vw_down_event_history_job = define_asset_job(
+#    name="mts_vw_down_event_history_job",
+#    selection=[mts_vw_down_event_history_assets],
+#)
+#
+mns_d_type_evenement_arret_job = define_asset_job(
+    name="mns_d_type_evenement_arret_job",
+    selection=[mns_d_type_evenement_arret_assets],
 )
 
-
+mns_f_equipement_arret_job = define_asset_job(
+    name="mns_f_equipement_arret_job",
+    selection=[mns_f_equipement_arret_assets],
+)
 #schedule : every day
 mns_d_site_schedule = ScheduleDefinition(
     job=mns_d_site_job,
@@ -47,24 +57,39 @@ ref_vw_nba_machines_schedule = ScheduleDefinition(
     cron_schedule="0 0 * * *", ## every day
 )
 
-mts_vw_down_event_history_schedule = ScheduleDefinition(
-    job=mts_vw_down_event_history_job,
+#mts_vw_down_event_history_schedule = ScheduleDefinition(
+#    job=mts_vw_down_event_history_job,
+#    cron_schedule="0 0 * * *", ## every day
+#)
+
+
+mns_d_type_evenement_arret_schedule = ScheduleDefinition(
+    job=mns_d_type_evenement_arret_job,
     cron_schedule="0 0 * * *", ## every day
 )
 
+mns_f_equipement_arret_schedule = ScheduleDefinition(
+    job=mns_f_equipement_arret_job,
+    cron_schedule="0 0 * * *", ## every day
+)
 
 defs = Definitions(
     jobs= [
         mns_d_site_job,
         mns_f_utilisation_equipement_job,
         ref_vw_nba_machines_job,
-        mts_vw_down_event_history_job
+        #mts_vw_down_event_history_job,
+        mns_d_type_evenement_arret_job,
+        mns_f_equipement_arret_job,
     ],
     assets=[
         mns_d_site_assets,
         mns_f_utilisation_equipement_assets,
         ref_vw_nba_machines_assets,
-        mts_vw_down_event_history_assets
+        #mts_vw_down_event_history_assets,
+        mns_d_type_evenement_arret_assets,
+        mns_f_equipement_arret_assets,
+        
     ],
     resources={
         "dlt":DagsterDltResource(),
@@ -73,7 +98,9 @@ defs = Definitions(
         mns_d_site_schedule,
         mns_f_utilisation_equipement_schedule,
         ref_vw_nba_machines_schedule,
-        mts_vw_down_event_history_schedule
+        #mts_vw_down_event_history_schedule,
+        mns_d_type_evenement_arret_schedule,
+        mns_f_equipement_arret_schedule,
     ]
 )
 

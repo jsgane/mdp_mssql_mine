@@ -83,19 +83,19 @@ def ref_vw_nba_machines_assets(context: dg.AssetExecutionContext) -> dg.Material
             "rows_loaded": dg.MetadataValue.int(result["rows_loaded"]),
         }
     ) 
-
+ 
 @dg.asset(
-    name="mts_vw_down_event_history",
+    name="mns_f_equipement_arret",
     group_name="data_for_mine",
-    description="Mts_vw_down_event_history from MSSQL → Snowflake via BCP + COPY INTO",
+    description="Mns_f_equipement_arret from MSSQL → Snowflake via BCP + COPY INTO",
 )
-def mts_vw_down_event_history_assets(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
-    """mts_vw_down_event_history from MSSQL"""
+def mns_f_equipement_arret_assets(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
+    """mns_f_equipement_arret_v_0_1 from MSSQL"""
     result = extract_mssql_data(
         snowflake_database = "NEEMBA",
         snowflake_schema = "MINES", 
-        mssql_table_name = "mts_vw_down_event_history",
-        snowflake_table_name = "a_bronze_mts_vw_down_event_history",
+        mssql_table_name = "mns_f_equipement_arret_v_0_1",
+        snowflake_table_name = "b_silver_mns_f_equipement_arret",
         logger = context.log,
     )
 
@@ -103,7 +103,50 @@ def mts_vw_down_event_history_assets(context: dg.AssetExecutionContext) -> dg.Ma
         metadata={
             "rows_loaded": dg.MetadataValue.int(result["rows_loaded"]),
         }
-    )   
+    )  
+ 
+@dg.asset(
+    name="mns_d_type_evenement_arret",
+    group_name="data_for_mine",
+    description="Mns_d_type_evenement_arret from MSSQL → Snowflake via BCP + COPY INTO",
+)
+def mns_d_type_evenement_arret_assets(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
+    """mns_d_type_evenement_arret from MSSQL"""
+    result = extract_mssql_data(
+        snowflake_database = "NEEMBA",
+        snowflake_schema = "MINES", 
+        mssql_table_name = "mns_d_type_evenement_arret",
+        snowflake_table_name = "b_silver_mns_d_type_evenement_arret",
+        logger = context.log,
+    )
+
+    return dg.MaterializeResult(
+        metadata={
+            "rows_loaded": dg.MetadataValue.int(result["rows_loaded"]),
+        }
+    )  
+
+##@dg.asset(
+##    name="mts_vw_down_event_history",
+##    group_name="data_for_mine",
+##    description="Mts_vw_down_event_history from MSSQL → Snowflake via BCP + COPY INTO",
+##)
+##def mts_vw_down_event_history_assets(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
+##    """mts_vw_down_event_history from MSSQL"""
+##    result = extract_mssql_data(
+##        snowflake_database = "NEEMBA",
+##        snowflake_schema = "MINES", 
+##        mssql_table_name = "mts_vw_down_event_history",
+##        snowflake_table_name = "a_bronze_mts_vw_down_event_history",
+##        logger = context.log,
+##    )
+##
+##    return dg.MaterializeResult(
+##        metadata={
+##            "rows_loaded": dg.MetadataValue.int(result["rows_loaded"]),
+##        }
+##    )  
+
 ###@dg.asset(
 ###    name="V_facture_dashboard_am",
 ###    group_name="data_for_nmbai",

@@ -6,6 +6,6 @@ mdp_mssql_mine:
       account: ""
       user: ""
       database: "NEEMBA"
-      schema: "services"
+      schema: "mines"
       warehouse: ""
       role: "TRANSFORM"

@@ -1,43 +1,17 @@
--- created_at: 2026-03-02T18:19:43.914424259+00:00
--- finished_at: 2026-03-02T18:19:44.067751603+00:00
--- elapsed: 153ms
--- outcome: success
--- dialect: snowflake
--- node_id: not available
--- query_id: 01c2c38b-0209-5889-0002-f322009315a6
--- desc: execute adapter call
-show terse schemas in database NEEMBA
-    limit 10000
-/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "mdp_mssql_mine", "target_name": "dev"} */;
--- created_at: 2026-03-02T18:19:45.434972916+00:00
--- finished_at: 2026-03-02T18:19:45.582651998+00:00
--- elapsed: 147ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.mdp_mssql_mine.fact_tum_kpis
--- query_id: 01c2c38b-0209-5889-0002-f322009315aa
--- desc: get_relation > list_relations call
-SHOW OBJECTS IN SCHEMA "NEEMBA"."MINES" LIMIT 10000;
--- created_at: 2026-03-02T18:19:45.588850935+00:00
--- finished_at: 2026-03-02T18:19:45.973435537+00:00
--- elapsed: 384ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.mdp_mssql_mine.fact_tum_kpis
--- query_id: 01c2c38b-0209-5b63-0002-f3220092ff26
--- desc: execute adapter call
-create or replace   view NEEMBA.mines.fact_tum_kpis
-  
-   as (
-    
+{{ 
+    config(
+        materialized= "view",
+        tags= ["silver", "mts_vw_tum_kpis"]
+    )
+}}
 
 
 with mts_vw_down_event_history as (
-    select * from NEEMBA.mines.b_silver_mts_vw_down_event_history
+    select * from {{ source('silver', 'b_silver_mts_vw_down_event_history') }}
 ),
 
 mts_vw_tum_kpis as (
-    select * from NEEMBA.mines.c_gold_mts_vw_tum_kpis
+    select * from {{ source('silver', 'c_gold_mts_vw_tum_kpis') }}
 ),
 
 cte as (
@@ -96,7 +70,7 @@ fact_tum_kpis as (
         ,current_timestamp()                                        as dbt_processed_at
         -- Metadata                             
         ,'gold_fact_tum_kpis'                                 as dbt_model_name
-        ,'c_gold_'                                 as layer_prefix
+        ,'{{ var("gold_prefix") }}'                                 as layer_prefix
         ,'fact_tum_kpis'                                      as business_domain
     from cte
         left join mts_vw_tum_kpis tum
@@ -139,5 +113,3 @@ fact_tum_kpis as (
 
 select * from fact_tum_kpis
 
-  )
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.mdp_mssql_mine.fact_tum_kpis", "profile_name": "mdp_mssql_mine", "target_name": "dev"} */;

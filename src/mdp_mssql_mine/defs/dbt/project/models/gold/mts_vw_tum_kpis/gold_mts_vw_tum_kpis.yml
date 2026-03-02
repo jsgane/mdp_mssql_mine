@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: gold_mts_vw_tum_kpis
+    description: |
+      mns_utilisation_equipement from mssql.
+
+      This silver layer model provides a clean, business-friendly view of all mns_utilisation_equipement. 
+      Sourced from mssql.
+
+    config:
+      tags: ["silver", "mns_utilisation_equipement"]
+    
+    columns:
+      - name: SiteID
+        description: "Surrogate key identifying the site."
+      
+      - name: Site
+        description: "Business code of the site."
+      
+      - name: NeembaEquipmentID
+        description: "Surrogate key identifying the equipment in the Neemba system."
+      
+      - name: Month
+        description: "Reporting month associated with the equipment activity (typically in YYYYMM format)."
+      
+      - name: hasSMUforMonth
+        description: "Flag indicating whether SMU (Service Meter Units) or operating hours exist for the equipment during the month (1 = yes, 0 = no)."
+      
+      - name: DaysInMonth
+        description: "Number of calendar days in the reporting month."
+      
+      - name: CT
+        description: "Calendar Time in hours for the reporting month (Days in Month multiplied by 24)."
+      
+      - name: OT
+        description: "Total Operating Time in hours recorded for the equipment during the month."
+      
+      - name: UPDT
+        description: "Total Unplanned Downtime in hours during the month."
+      
+      - name: PDT
+        description: "Total Planned Downtime in hours during the month."
+      
+      - name: UPC
+        description: "Number of Unplanned Downtime events during the month."
+      
+      - name: PC
+        description: "Number of Planned Downtime events during the month."
+
+      - name: dbt_model_name
+        description: "Name of the dbt model that created this record"
+
+      - name: layer_prefix
+        description: "Data layer prefix (silver)"
+
+      - name: business_domain
+        description: "Business domain classification"

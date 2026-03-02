@@ -10,5 +10,5 @@ mdp_mssql_mine:
       role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORM') }}"
       warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
       database: "{{ env_var('SNOWFLAKE_DATABASE', 'NEEMBA') }}"
-      schema: services
+      schema: mines
       threads: 2

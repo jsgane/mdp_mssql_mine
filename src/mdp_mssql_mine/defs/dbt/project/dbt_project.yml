@@ -22,7 +22,6 @@ models:
       +materialized: view
       +tags: ["silver", "transformation"]
       
-      
       mns_site:
         silver_mns_site:
           +alias: "Dim_Sites"
@@ -38,23 +37,35 @@ models:
           node_color: "#4CAF50"
       
       mns_utilisation_equipement:
-        silver_mns_utilisation_equipement:
+        silver_mns_f_utilisation_equipement:
           +alias: "Fact_Op_Hours"
         +tags: ["silver", "mns_utilisation_equipement"]
         +docs:
           node_color: "#4CAF50"
       
-      
-      
-    #gold:
-    #  +materialized: table
-    #  +tags: ["gold", "analytics"]
-    #  work_order:
-    #    gold_quote_work_order:
-    #      +alias: "C_GOLD_QUOTE_WORK_ORDER"
-    #    +tags: ["gold", "work_order"]
-    #    +docs:
-    #      node_color: "#FFD700"
+      mts_vw_down_event_history:
+        silver_mts_vw_down_event_history:
+          +alias: "b_silver_mts_vw_down_event_history"
+        +tags: ["silver", "mts_vw_down_event_history"]
+        +docs:
+          node_color: "#4CAF50"
+    ### GOLD
+    gold:
+      +materialized: table
+      +tags: ["gold", "analytics"]
+      mts_vw_tum_kpis:
+        gold_mts_vw_tum_kpis:
+          +alias: "C_gold_mts_vw_tum_kpis"
+        +tags: ["gold", "gold_mts_vw_tum_kpis"]
+        +docs:
+          node_color: "#FFD700"
+          
+      fact_tum_kpis:
+        fact_tum_kpis:
+          +alias: "fact_tum_kpis"
+        +tags: ["gold", "fact_tum_kpis"]
+        +docs:
+          node_color: "#FFD700"
       
 
 
@@ -67,7 +78,7 @@ vars:
   bronze_prefix: 'a_bronze_'
   silver_prefix: 'b_silver_'
   gold_prefix: 'c_gold_'
-  schema_name: 'services'
+  schema_name: 'mines'
   lookback_days: 90
   environment: 'production'
 
