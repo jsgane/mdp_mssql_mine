@@ -62,6 +62,7 @@ def mns_f_utilisation_equipement_assets(context: dg.AssetExecutionContext) -> dg
             "rows_loaded": dg.MetadataValue.int(result["rows_loaded"]),
         }
     )  
+
 @dg.asset(
     name="ref_vw_nba_machines",
     group_name="data_for_mine",
@@ -81,8 +82,28 @@ def ref_vw_nba_machines_assets(context: dg.AssetExecutionContext) -> dg.Material
         metadata={
             "rows_loaded": dg.MetadataValue.int(result["rows_loaded"]),
         }
-    )  
+    ) 
 
+@dg.asset(
+    name="mts_vw_down_event_history",
+    group_name="data_for_mine",
+    description="Mts_vw_down_event_history from MSSQL → Snowflake via BCP + COPY INTO",
+)
+def mts_vw_down_event_history_assets(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
+    """mts_vw_down_event_history from MSSQL"""
+    result = extract_mssql_data(
+        snowflake_database = "NEEMBA",
+        snowflake_schema = "MINES", 
+        mssql_table_name = "mts_vw_down_event_history",
+        snowflake_table_name = "a_bronze_mts_vw_down_event_history",
+        logger = context.log,
+    )
+
+    return dg.MaterializeResult(
+        metadata={
+            "rows_loaded": dg.MetadataValue.int(result["rows_loaded"]),
+        }
+    )   
 ###@dg.asset(
 ###    name="V_facture_dashboard_am",
 ###    group_name="data_for_nmbai",

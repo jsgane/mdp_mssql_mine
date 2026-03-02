@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: "Bronze layer (raw Mssql data extracted by Dagster)"
+    database: "{{ env_var('SNOWFLAKE_DATABASE', 'NEEMBA') }}"
+    schema: mines
+
+    tables:
+      - name: a_bronze_mns_d_site
+        description: "Sites information (Source: [NMBMTS].[dbo].[mns_d_site])"
+
+      - name: a_bronze_ref_vw_nba_machines
+        description: "Dim_Machine information (Source:  [NMBMTS].[dbo].[mns_f_utilisation_equipement])"
+
+      - name: a_bronze_mns_f_utilisation_equipement
+        description: "Fact_Op_Hours information (Source:  [NMBMTS].[dbo].[ref_vw_nba_machines] )"

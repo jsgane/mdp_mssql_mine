@@ -1,0 +1,70 @@
+[32m2026-02-27 19:07:16 +0000[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - 769309 - LOGS_CAPTURED - Started capturing logs in process (pid: 769309).
+[32m2026-02-27 19:07:16 +0000[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - 769309 - mts_vw_down_event_history - STEP_START - Started execution of step "mts_vw_down_event_history".
+[32m2026-02-27 19:07:16 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - 
+================================================================================
+[32m2026-02-27 19:07:16 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - 🚀 PIPELINE MSSQL → SNOWFLAKE
+[32m2026-02-27 19:07:17 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - 📤➡️❄️  Méthode: BCP + COPY INTO
+[32m2026-02-27 19:07:17 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - ================================================================================
+
+[32m2026-02-27 19:07:17 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - ================================================================================
+[32m2026-02-27 19:07:17 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - 📤 Export BCP depuis SQL Server pour la table mts_vw_down_event_history
+[32m2026-02-27 19:07:17 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - ================================================================================
+[32m2026-02-27 19:07:17 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - 🗑️  Fichier existant supprimé: /tmp/mssql_export.csv
+2026-02-27 19:07:17,092 - INFO - 🔧 BCPExporter initialisé:
+2026-02-27 19:07:17,092 - INFO -    Mode: Natif
+2026-02-27 19:07:17,092 - INFO -    BCP: bcp
+[32m2026-02-27 19:07:17 +0000[0m - dagster - [34mINFO[0m - __ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - 🔄 Exécution BCP...
+2026-02-27 19:07:17,108 - INFO - 💻 Mode natif
+2026-02-27 19:07:17,108 - INFO - 🔄 Commande BCP: bcp SELECT TOP 10000000 * FROM mts_vw_down_event_history WITH (NOLOCK) queryout /tmp/mssql_export.csv -c -C 65001 -t | -r 
+ -b 100000 -a 32767 -S *** -d *** -U *** -P ***
+2026-02-27 19:07:18,733 - INFO - BCP STDOUT:
+SQLState = IM006, NativeError = 0
+Error = [Microsoft][ODBC Driver 18 for SQL Server]Packet size change not supported by server, default used
+SQLState = 37000, NativeError = 4060
+Error = [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Cannot open database "Mine_sites" requested by the login. The login failed.
+SQLState = 28000, NativeError = 18456
+Error = [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Login failed for user 'sqltalend'.
+
+2026-02-27 19:07:18,733 - ERROR - ❌ BCP a échoué (code 1)
+2026-02-27 19:07:18,734 - ERROR - STDOUT: SQLState = IM006, NativeError = 0
+Error = [Microsoft][ODBC Driver 18 for SQL Server]Packet size change not supported by server, default used
+SQLState = 37000, NativeError = 4060
+Error = [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Cannot open database "Mine_sites" requested by the login. The login failed.
+SQLState = 28000, NativeError = 18456
+Error = [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Login failed for user 'sqltalend'.
+
+2026-02-27 19:07:18,734 - ERROR - STDERR: 
+2026-02-27 19:07:18,734 - ERROR - 💡 Authentification échouée
+2026-02-27 19:07:18,734 - ERROR -    Vérifier user: sqltalend
+[32m2026-02-27 19:07:18 +0000[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - ❌ Erreur BCP: Command '['bcp', 'SELECT TOP 10000000 * FROM mts_vw_down_event_history WITH (NOLOCK)', 'queryout', '/tmp/mssql_export.csv', '-c', '-C', '65001', '-t', '|', '-r', '\n', '-b', '100000', '-a', '32767', '-S', 'BODSQLDEV\\DATAWH;Encrypt=no;TrustServerCertificate=yes', '-d', 'Mine_sites', '-U', 'sqltalend', '-P', 'sql1234*']' returned non-zero exit status 1.[0m
+[32m2026-02-27 19:07:18 +0000[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - mts_vw_down_event_history - 
+❌ ERREUR PIPELINE: Command '['bcp', 'SELECT TOP 10000000 * FROM mts_vw_down_event_history WITH (NOLOCK)', 'queryout', '/tmp/mssql_export.csv', '-c', '-C', '65001', '-t', '|', '-r', '\n', '-b', '100000', '-a', '32767', '-S', 'BODSQLDEV\\DATAWH;Encrypt=no;TrustServerCertificate=yes', '-d', 'Mine_sites', '-U', 'sqltalend', '-P', 'sql1234*']' returned non-zero exit status 1.[0m
+[32m2026-02-27 19:07:18 +0000[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - 833ab439-beaf-41fc-8b75-1a3187b67c86 - 769309 - mts_vw_down_event_history - STEP_FAILURE - Execution of step "mts_vw_down_event_history" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "mts_vw_down_event_history"::
+
+subprocess.CalledProcessError: Command '['bcp', 'SELECT TOP 10000000 * FROM mts_vw_down_event_history WITH (NOLOCK)', 'queryout', '/tmp/mssql_export.csv', '-c', '-C', '65001', '-t', '|', '-r', '\n', '-b', '100000', '-a', '32767', '-S', 'BODSQLDEV\\DATAWH;Encrypt=no;TrustServerCertificate=yes', '-d', 'Mine_sites', '-U', 'sqltalend', '-P', 'sql1234*']' returned non-zero exit status 1.
+
+Stack Trace:
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/.venv/lib/python3.12/site-packages/dagster/_core/execution/plan/utils.py", line 57, in op_execution_error_boundary
+    yield
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/.venv/lib/python3.12/site-packages/dagster/_utils/__init__.py", line 394, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/.venv/lib/python3.12/site-packages/dagster/_core/execution/plan/compute_generator.py", line 135, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/.venv/lib/python3.12/site-packages/dagster/_core/execution/plan/compute_generator.py", line 115, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/src/mdp_mssql_mine/defs/assets.py", line 94, in ref_vw_nba_machines_assets
+    result = extract_mssql_data(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/src/mdp_mssql_mine/defs/load_bcp_copy_into.py", line 45, in extract_mssql_data
+    export_mssql_bcp(table_name = mssql_table_name, logger = logger)
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/src/mdp_mssql_mine/defs/config.py", line 288, in export_mssql_bcp
+    success, bcp_duration, file_size_mb = exporter.export(
+                                          ^^^^^^^^^^^^^^^^
+  File "/home/sarrj/project_jgs/mdp_mssql_mine/src/mdp_mssql_mine/defs/config.py", line 231, in export
+    raise subprocess.CalledProcessError(
+[0m

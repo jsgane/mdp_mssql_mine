@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: silver_mns_site 
+    description: |
+      mns_site from mssql.
+
+      This silver layer model provides a clean, business-friendly view of all component codes. 
+      Sourced from the mssql tables.
+
+    config:
+      tags: ["silver", "mns_site"]
+
+    columns:
+      - name: MTS_SiteID
+        description: "MTS_SiteID"
+        tests:
+          - not_null
+          - unique
+
+      - name: SiteCode
+        description: "SiteCode"
+
+      - name: SiteDesc
+        description: "SiteDesc"
+
+      - name: Latitude
+        description: "Latitude"
+
+      - name: Longitude
+        description: "Longitude"
+        
+      
+      - name: dbt_processed_at
+        description: "Timestamp when dbt processed this data"
+        tests:
+          - not_null
+
+      - name: dbt_model_name
+        description: "Name of the dbt model that created this record"
+
+      - name: layer_prefix
+        description: "Data layer prefix (silver)"
+
+      - name: business_domain
+        description: "Business domain classification"

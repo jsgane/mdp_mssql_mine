@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: silver_delivery_service 
+    description: |
+      Parts delivery service header and line from sav.
+
+      This silver layer model provides a clean, business-friendly view of all delivery service. 
+      Sourced from the informix tables.
+
+    config:
+      tags: ["silver", "delivery_service_headers", "delivery_service_lines"]
+
+    columns:
+      - name: MineStarOID
+        description: "Unique identifier of the equipment in the MineStar system."
+    
+      - name: NeembaEquipmentID
+        description: "Unique equipment identifier used internally by Neemba."
+    
+      - name: SiteCode
+        description: "Short code representing the operational site."
+    
+      - name: SiteDesc
+        description: "Full descriptive name of the operational site."
+    
+      - name: SiteID
+        description: "Unique identifier of the site."
+    
+      - name: Category
+        description: "Equipment category or classification (e.g., truck, loader, drill)."
+    
+      - name: Model
+        description: "Equipment model designation."
+    
+      - name: SerialNumber
+        description: "Manufacturer serial number of the equipment."
+    
+      - name: FleetName
+        description: "Name of the fleet to which the equipment belongs."
+    
+      - name: MineStarSerialNumber
+        description: "Serial number assigned within the MineStar system."
+    
+      - name: Manufacturer
+        description: "Company that manufactured the equipment."
+    
+      - name: NominalPayload
+        description: "Rated payload capacity of the equipment under normal operating conditions."
+    
+      - name: EquipmentStatus
+        description: "Current operational status of the equipment."
+    
+      - name: payloadAvailable
+        description: "Available payload capacity remaining for the equipment."
+              
+      - name: dbt_processed_at
+        description: "Timestamp when dbt processed this data"
+        tests:
+          - not_null
+
+      - name: dbt_model_name
+        description: "Name of the dbt model that created this record"
+
+      - name: layer_prefix
+        description: "Data layer prefix (silver)"
+
+      - name: business_domain
+        description: "Business domain classification"

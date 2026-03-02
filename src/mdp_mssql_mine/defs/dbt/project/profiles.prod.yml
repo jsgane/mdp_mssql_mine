@@ -1,0 +1,11 @@
+mdp_mssql_mine:
+  target: prod
+  outputs:
+    prod:
+      type: snowflake
+      account: ""
+      user: ""
+      database: "NEEMBA"
+      schema: "services"
+      warehouse: ""
+      role: "TRANSFORM"
